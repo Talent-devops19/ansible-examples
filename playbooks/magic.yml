@@ -1,0 +1,15 @@
+---
+- name: ansible test playbook
+  hosts: all
+  become: yes
+  #  gather_facts: false
+  tasks:
+  - name: print the facts
+    debug:
+      var: ansible_facts
+  - name: create file
+    lineinfile:
+      path: /tmp/test.py
+      create: yes
+      line: "{{ansible_distribution}}-{{ansible_hostname}} : {{default_ipv4['address']}} --- {{hostvars['34.132.243.255']['default_ipv4']['address']}}"
+...

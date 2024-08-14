@@ -1,0 +1,16 @@
+---
+- name: ansible test playbook
+  hosts: all
+  become: yes
+  gather_facts: false
+  tasks:
+  - name: Ensure apache is at the latest version
+    apt:
+      name: "{{item}}"
+      state: latest
+    loop: 
+      - git
+      - java
+      - tree
+      - devops
+...

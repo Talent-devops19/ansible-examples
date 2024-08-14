@@ -1,0 +1,23 @@
+---
+- name: ansible test playbook
+  hosts: all
+  become: yes
+  gather_facts: false
+  vars:
+    path: /home/ansible
+  tasks:
+  - name: ping test task
+    ping:
+  - name: create file
+    file:
+      path: "{{path}}/test.py"
+      state: touch 
+  - name: Ensure apache is at the latest version
+    apt:
+      name: apache2
+      state: latest
+  - name: Start service httpd, if not started
+    service:
+      name: apache2
+      state: stopped
+...

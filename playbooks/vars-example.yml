@@ -1,0 +1,20 @@
+---
+- name: ansible test playbook
+  hosts: all
+  gather_facts: false
+  vars:
+    path: /tmp
+  vars_files:
+    - vars.yml
+  tasks:
+  - name: write the service list into file
+    lineinfile:
+      path: "{{path}}/{{filename}}"
+      line: "{{services}}"
+      create: yes
+  - name: write the service list into file
+    lineinfile:
+      path: "{{path}}/{{filename}}"
+      line: "{{directories}}"
+      create: yes
+...

@@ -1,0 +1,15 @@
+---
+- name: ansible test playbook
+  hosts: all
+  become: yes
+  gather_facts: false
+  tasks:
+  - name: ping test task
+    ping:
+  - name: see the output of service file
+    command: cat /home/ansible/services.txt
+    register: output
+  - name: display the output
+    debug: 
+      var: output
+...

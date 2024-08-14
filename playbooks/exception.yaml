@@ -1,0 +1,16 @@
+- name: demo of exception handling
+  hosts: all
+  tasks:
+  - name: install software
+    block:
+      - apt:
+          name: jenkins
+          state: present
+        register: status
+    rescue:
+      - name: display error in rescure block
+        debug:
+          var: status
+    always:
+      - debug:
+          msg: "installation of jenkins is sucess"

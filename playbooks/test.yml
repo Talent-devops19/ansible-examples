@@ -1,0 +1,32 @@
+---
+- name: ansible test playbook
+  hosts: all
+  become: yes
+  gather_facts: false
+  ignore_unreachable: true
+  tasks:
+  - name: ping test task
+    ping:
+    tags: 
+      - connectivity
+    ignore_errors: yes
+  - name: create file
+    file:
+      path: /tmp/test.py
+      state: touch 
+    tags:
+      - files 
+  - name: Ensure apache is at the latest version
+    apt:
+      name: apache2
+      state: latest
+    tags:
+      - webserver
+  - name: Start service httpd, if not started
+    service:
+      name: apache2
+      state: stopped
+    tags:
+      - webserver
+      - web
+...

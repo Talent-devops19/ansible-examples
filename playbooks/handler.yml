@@ -1,0 +1,21 @@
+---
+- name: ansible test playbook
+  hosts: all
+  become: yes
+  gather_facts: false
+  vars:
+    timeout: 150
+    loglevel: error
+  tasks:
+    - name: copy the template file to remote servers
+      template:
+        src: apache2.j2
+        dest: /etc/apache2/apache2.conf
+      notify: restarting apache2
+  handlers:  
+    - name: restarting apache2
+      service:
+        name: apache2
+        state: restarted
+      listen: restarting apache2
+...

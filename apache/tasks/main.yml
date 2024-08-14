@@ -1,0 +1,18 @@
+---
+# tasks file for apache
+- name: install apache2 in ubuntu
+  apt:
+    name: apache2
+    state: present
+- name: copy html file to /var/www/html
+  copy:
+    src: home.html
+    dest: /var/www/html/home.html
+  notify: restarting apache2
+- name: deploying templates
+  template:
+    src: ports.j2
+    dest: /etc/apache2/ports.conf
+  notify: restarting apache2
+
+

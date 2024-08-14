@@ -1,0 +1,10 @@
+- name: vault example
+  hosts: all
+  vars_files:
+    - /home/ansible/playbooks/credentails.txt
+  tasks:
+    - name: add credentials in file
+      lineinfile:
+        path: /tmp/credentials.py
+        create: yes
+        line: "{{username}}:{{password}}"

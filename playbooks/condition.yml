@@ -1,0 +1,19 @@
+---
+- name: ansible test playbook
+  hosts: all
+  become: yes
+  gather_facts: true
+  tasks:
+  - name: ping test task
+    ping:
+  - name: create file
+    file:
+      path: /tmp/test.py
+      state: touch 
+  - name: Ensure apache is at the latest version
+    apt:
+      name: apache2
+      state: latest
+    when: ansible_distribution == "RHEL"
+
+...

@@ -1,0 +1,25 @@
+---
+- name: ansible test playbook
+  hosts: all
+  gather_facts: false
+  vars:
+    path: /home/ansible
+    filename: services.txt
+    services:
+      - apache2
+      - nginx
+    directories:
+      dir1: /home/devops/dir1
+      dir2: /home/devops/dir2
+  tasks:
+  - name: write the service list into file
+    lineinfile:
+      path: "{{path}}/{{filename}}"
+      line: "{{services}}"
+      create: yes
+  - name: write the service list into file
+    lineinfile:
+      path: "{{path}}/{{filename}}"
+      line: "{{directories}}"
+      create: yes
+...

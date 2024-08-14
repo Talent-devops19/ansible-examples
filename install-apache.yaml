@@ -1,0 +1,6 @@
+- name: deploying apache role
+  hosts: all
+  become: yes
+  roles:
+    - apache
+    - ansible-role-docker

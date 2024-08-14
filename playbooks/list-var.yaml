@@ -1,0 +1,22 @@
+---
+- name: ansible test playbook
+  hosts: all
+  become: yes
+  gather_facts: false
+  vars:
+    path: /home/ansible
+    services:
+      - apache2
+      - nginx
+  tasks:
+  - name: ping test task
+    ping:
+  - name: create file
+    file:
+      path: "{{path}}/test.py"
+      state: touch 
+  - name: write the service list into file
+    lineinfile:
+      path: "{{path}}/test.py"
+      line: "{{services}}"
+...

@@ -1,0 +1,15 @@
+- name: deploy reactjs microservice 
+  hosts: all
+  become: yes
+  tasks:
+    - name: deploy reactjs docker container
+      docker_container:
+        name: reactjs
+        image: malleshdevops/devops20:reactjs-v1
+        state: present
+        ports:
+          - "81:80"
+    - name: start the container
+      docker_container:
+        name: reactjs
+        state: started

@@ -1,0 +1,15 @@
+---
+- name: ansible test playbook
+  hosts: all
+  become: yes
+  gather_facts: false
+  vars:
+    uname: devops
+    page: 2.0
+    tbatch: 8am
+  tasks:
+    - name: copy the template file to remote servers
+      template:
+        src: test.j2
+        dest: /home/ansible/details.txt
+...
